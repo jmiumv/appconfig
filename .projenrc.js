@@ -6,7 +6,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: 'cdk-appconfig',
   description: 'A custom construct for setting up AppConfig using aws-cdk',
   repositoryUrl: 'https://github.com/JoeNonExotic/cdk-appconfig.git',
-
+  releaseToNpm: true,
+  releaseEveryCommit: true,
+  prerelease: 'beta',
   devDeps: ['ts-node', 'aws-cdk-lib', 'constructs'],
   peerDeps: ['aws-cdk-lib', 'constructs'],
 });
