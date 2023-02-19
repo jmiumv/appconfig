@@ -5,6 +5,11 @@ This simple project was inspired from [this stackoverflow question](https://stac
 
 When I [read docs on the AppConfig construct library](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_appconfig-readme.html), I soon realized that it was ripe for L2 and L3 constructs. Hence this library. 
 
+PRs are always welcome ! 
+
+## To-Do/Work In Progress (PRs welcome!!!)
+- [ ] A more customizable construct allowing consumers for a deeper configuration.
+
 ## Releases
 |Language|Repository
 |--------|-----------
