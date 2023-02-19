@@ -3,7 +3,7 @@
   "description": "A custom construct for setting up AppConfig using aws-cdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JoeNonExotic/cdk-appconfig.git"
+    "url": "https://github.com/JoeNonExotic/appconfig.git"
   },
   "scripts": {
     "build": "npx projen build",
