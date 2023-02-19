@@ -1,15 +1,14 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'JoeNonExotic',
-  authorAddress: 'vijayvikramreddy@gmail.com',
+  defaultReleaseBranch: 'master',
+  author: 'JNE',
   cdkVersion: '2.1.0',
-  defaultReleaseBranch: 'main',
-  name: 'appconfig',
-  repositoryUrl: 'https://github.com/vijayvikramreddy/appconfig.git',
+  name: 'cdk-appconfig',
+  description: 'A custom construct for setting up AppConfig using aws-cdk',
+  repositoryUrl: 'https://github.com/JoeNonExotic/cdk-appconfig.git',
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  devDeps: ['ts-node', 'aws-cdk-lib', 'constructs'],
+  peerDeps: ['aws-cdk-lib', 'constructs'],
 });
+project.addKeywords('appconfig', 'constructs');
 project.synth();

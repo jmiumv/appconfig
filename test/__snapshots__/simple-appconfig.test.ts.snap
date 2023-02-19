@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`simple-appconfig creates expected resources 1`] = `
+Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "SimpleAppConfigApplication04939DED": Object {
+      "Properties": Object {
+        "Name": "MyTestApp",
+      },
+      "Type": "AWS::AppConfig::Application",
+    },
+    "SimpleAppConfigConfigurationProfile78536DC3": Object {
+      "Properties": Object {
+        "ApplicationId": Object {
+          "Ref": "SimpleAppConfigApplication04939DED",
+        },
+        "LocationUri": "hosted",
+        "Name": "MyConfigurationProfile",
+        "Type": "AWS.Freeform",
+      },
+      "Type": "AWS::AppConfig::ConfigurationProfile",
+    },
+    "SimpleAppConfigDeployStrategy14D4E4A1": Object {
+      "Properties": Object {
+        "DeploymentDurationInMinutes": 0,
+        "FinalBakeTimeInMinutes": 0,
+        "GrowthFactor": 100,
+        "Name": "ImmediateDeployment",
+        "ReplicateTo": "NONE",
+      },
+      "Type": "AWS::AppConfig::DeploymentStrategy",
+    },
+    "SimpleAppConfigDeploymentB0181BC9": Object {
+      "Properties": Object {
+        "ApplicationId": Object {
+          "Ref": "SimpleAppConfigApplication04939DED",
+        },
+        "ConfigurationProfileId": Object {
+          "Ref": "SimpleAppConfigConfigurationProfile78536DC3",
+        },
+        "ConfigurationVersion": Object {
+          "Ref": "SimpleAppConfigHostedConfigurationVersion67E8BB89",
+        },
+        "DeploymentStrategyId": Object {
+          "Ref": "SimpleAppConfigDeployStrategy14D4E4A1",
+        },
+        "EnvironmentId": Object {
+          "Ref": "SimpleAppConfigEnvironmentCD8BFB59",
+        },
+      },
+      "Type": "AWS::AppConfig::Deployment",
+    },
+    "SimpleAppConfigEnvironmentCD8BFB59": Object {
+      "Properties": Object {
+        "ApplicationId": Object {
+          "Ref": "SimpleAppConfigApplication04939DED",
+        },
+        "Name": "MyTestEnvironment",
+      },
+      "Type": "AWS::AppConfig::Environment",
+    },
+    "SimpleAppConfigHostedConfigurationVersion67E8BB89": Object {
+      "Properties": Object {
+        "ApplicationId": Object {
+          "Ref": "SimpleAppConfigApplication04939DED",
+        },
+        "ConfigurationProfileId": Object {
+          "Ref": "SimpleAppConfigConfigurationProfile78536DC3",
+        },
+        "Content": "{\\"StringKey\\":\\"StringValue\\",\\"BooleanKey\\":true,\\"NumberKey\\":123,\\"CompositeKey\\":{\\"StringKey\\":\\"StringValue\\",\\"BooleanKey\\":false,\\"NumberKey\\":456},\\"ArrayKey\\":[{\\"StringKey\\":\\"StringValue1\\",\\"BooleanKey\\":true,\\"NumberKey\\":123},{\\"StringKey\\":\\"StringValue2\\",\\"BooleanKey\\":false,\\"NumberKey\\":456}]}",
+        "ContentType": "application/json",
+      },
+      "Type": "AWS::AppConfig::HostedConfigurationVersion",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

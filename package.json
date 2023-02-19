@@ -1,8 +1,9 @@
 {
-  "name": "appconfig",
+  "name": "cdk-appconfig",
+  "description": "A custom construct for setting up AppConfig using aws-cdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vijayvikramreddy/appconfig.git"
+    "url": "https://github.com/JoeNonExotic/cdk-appconfig.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -29,8 +30,7 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "JoeNonExotic",
-    "email": "vijayvikramreddy@gmail.com",
+    "name": "JNE",
     "organization": false
   },
   "devDependencies": {
@@ -54,6 +54,7 @@
     "projen": "^0.67.59",
     "standard-version": "^9",
     "ts-jest": "^27",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
@@ -61,7 +62,9 @@
     "constructs": "^10.0.5"
   },
   "keywords": [
-    "cdk"
+    "appconfig",
+    "cdk",
+    "constructs"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
