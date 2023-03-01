@@ -194,7 +194,7 @@ const simpleAppConfigProps: SimpleAppConfigProps = { ... }
 | --- | --- | --- |
 | <code><a href="#cdk-appconfig.SimpleAppConfigProps.property.applicationEnvironment">applicationEnvironment</a></code> | <code>string</code> | The name of the environment for deployment. |
 | <code><a href="#cdk-appconfig.SimpleAppConfigProps.property.applicationName">applicationName</a></code> | <code>string</code> | The name of the app config application. |
-| <code><a href="#cdk-appconfig.SimpleAppConfigProps.property.configurationContent">configurationContent</a></code> | <code>{[ key: string ]: any}</code> | The content within the configuration profile. |
+| <code><a href="#cdk-appconfig.SimpleAppConfigProps.property.configurationContent">configurationContent</a></code> | <code>{[ key: string ]: any} \| object</code> | The content within the configuration profile. |
 | <code><a href="#cdk-appconfig.SimpleAppConfigProps.property.configurationProfileName">configurationProfileName</a></code> | <code>string</code> | The name for the configuration profile within the application. |
 
 ---
@@ -230,10 +230,10 @@ The name of the app config application.
 ##### `configurationContent`<sup>Required</sup> <a name="configurationContent" id="cdk-appconfig.SimpleAppConfigProps.property.configurationContent"></a>
 
 ```typescript
-public readonly configurationContent: {[ key: string ]: any};
+public readonly configurationContent: {[ key: string ]: any} | object;
 ```
 
-- *Type:* {[ key: string ]: any}
+- *Type:* {[ key: string ]: any} | object
 
 The content within the configuration profile.
 

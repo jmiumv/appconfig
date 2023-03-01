@@ -27,16 +27,6 @@ Object {
       },
       "Type": "AWS::AppConfig::ConfigurationProfile",
     },
-    "SimpleAppConfigDeployStrategy14D4E4A1": Object {
-      "Properties": Object {
-        "DeploymentDurationInMinutes": 0,
-        "FinalBakeTimeInMinutes": 0,
-        "GrowthFactor": 100,
-        "Name": "ImmediateDeployment",
-        "ReplicateTo": "NONE",
-      },
-      "Type": "AWS::AppConfig::DeploymentStrategy",
-    },
     "SimpleAppConfigDeploymentB0181BC9": Object {
       "Properties": Object {
         "ApplicationId": Object {
@@ -49,7 +39,7 @@ Object {
           "Ref": "SimpleAppConfigHostedConfigurationVersion67E8BB89",
         },
         "DeploymentStrategyId": Object {
-          "Ref": "SimpleAppConfigDeployStrategy14D4E4A1",
+          "Ref": "SimpleAppConfigImmediateDeployStrategy781EA584",
         },
         "EnvironmentId": Object {
           "Ref": "SimpleAppConfigEnvironmentCD8BFB59",
@@ -78,6 +68,16 @@ Object {
         "ContentType": "application/json",
       },
       "Type": "AWS::AppConfig::HostedConfigurationVersion",
+    },
+    "SimpleAppConfigImmediateDeployStrategy781EA584": Object {
+      "Properties": Object {
+        "DeploymentDurationInMinutes": 0,
+        "FinalBakeTimeInMinutes": 0,
+        "GrowthFactor": 100,
+        "Name": "ImmediateDeployment",
+        "ReplicateTo": "NONE",
+      },
+      "Type": "AWS::AppConfig::DeploymentStrategy",
     },
   },
   "Rules": Object {

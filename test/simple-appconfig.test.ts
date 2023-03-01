@@ -79,7 +79,7 @@ describe('simple-appconfig', () => {
         Ref: 'SimpleAppConfigHostedConfigurationVersion67E8BB89',
       },
       DeploymentStrategyId: {
-        Ref: 'SimpleAppConfigDeployStrategy14D4E4A1',
+        Ref: 'SimpleAppConfigImmediateDeployStrategy781EA584',
       },
       EnvironmentId: {
         Ref: 'SimpleAppConfigEnvironmentCD8BFB59',

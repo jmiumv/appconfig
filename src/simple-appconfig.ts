@@ -1,10 +1,7 @@
 import { CfnApplication, CfnConfigurationProfile, CfnDeployment, CfnDeploymentStrategy, CfnEnvironment, CfnHostedConfigurationVersion } from 'aws-cdk-lib/aws-appconfig';
 import { Construct } from 'constructs';
-
-/**
- * A simple type represenation for https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type "application-json"
- */
-export type ConfigurationContent = { [x: string]: any };
+import { ConfigurationContent } from './appconfig-types';
+import { getApplication, getAppConfigDeploymentStrategy, getAppConfigEnvironment, getAppConfigHostedConfigurationProfile, getAppConfigHostedConfigurationVersion, getAppConfigDeployment } from './utils';
 
 /**
  * Props for {@link SimpleAppConfig} construct.
@@ -55,72 +52,56 @@ export class SimpleAppConfig extends Construct {
     super(scope, id);
 
     // Create a new application
-    this.application = new CfnApplication(
+    this.application = getApplication(
       this,
       'Application',
-      {
-        name: this.props.applicationName,
-      },
+      this.props.applicationName,
     );
 
+
     // setup a deploy strategy to immediately apply config.
-    this.immediateDeploymentStrategy = new CfnDeploymentStrategy(
+    this.immediateDeploymentStrategy = getAppConfigDeploymentStrategy(
       this,
-      'DeployStrategy',
-      {
-        name: 'ImmediateDeployment',
-        deploymentDurationInMinutes: 0,
-        growthFactor: 100,
-        replicateTo: 'NONE',
-        finalBakeTimeInMinutes: 0,
-      },
+      'ImmediateDeployStrategy',
+      'ImmediateDeployment',
     );
 
     // setup an app config env
-    this.environment = new CfnEnvironment(
+    this.environment = getAppConfigEnvironment(
       this,
       'Environment',
-      {
-        applicationId: this.application.ref,
-        // can be anything that makes sense for your use case.
-        name: this.props.applicationEnvironment,
-      },
+      this.application,
+      this.props.applicationEnvironment,
     );
 
     // setup config profile
-    this.configurationProfile = new CfnConfigurationProfile(
+    this.configurationProfile = getAppConfigHostedConfigurationProfile(
       this,
       'ConfigurationProfile',
-      {
-        name: this.props.configurationProfileName,
-        applicationId: this.application.ref,
-        // we want AppConfig to manage the configuration profile, unless we need from SSM or S3.
-        locationUri: 'hosted',
-        // This can also be "AWS.AppConfig.FeatureFlags"
-        type: 'AWS.Freeform',
-      },
+      this.application,
+      this.props.configurationProfileName,
+      'AWS.Freeform',
     );
 
     // Update AppConfig
-    this.hostedConfigurationVersion = new CfnHostedConfigurationVersion(
+    this.hostedConfigurationVersion = getAppConfigHostedConfigurationVersion(
       this,
       'HostedConfigurationVersion',
-      {
-        applicationId: this.application.ref,
-        configurationProfileId: this.configurationProfile.ref,
-        content: JSON.stringify(this.props.configurationContent),
-        // https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
-        contentType: 'application/json',
-      },
+      this.application,
+      this.configurationProfile,
+      this.props.configurationContent,
     );
 
+
     // Perform deployment.
-    this.deployment = new CfnDeployment(this, 'Deployment', {
-      applicationId: this.application.ref,
-      configurationProfileId: this.configurationProfile.ref,
-      configurationVersion: this.hostedConfigurationVersion.ref,
-      deploymentStrategyId: this.immediateDeploymentStrategy.ref,
-      environmentId: this.environment.ref,
-    });
+    this.deployment = getAppConfigDeployment(
+      this,
+      'Deployment',
+      this.application,
+      this.configurationProfile,
+      this.hostedConfigurationVersion,
+      this.immediateDeploymentStrategy,
+      this.environment,
+    );
   }
 }
